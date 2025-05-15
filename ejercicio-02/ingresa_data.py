@@ -5,26 +5,25 @@ from genera_base import Pais
 
 import json
 
-# se genera en enlace al gestor de base de
-# datos
-# para el ejemplo se usa la base de datos
-# sqlite
+# se crea conexion con la base de datos sqlite
 engine = create_engine('sqlite:///basePaises.db')
 
-
+# se crea la sesion para interactuar con la base de datos
 Session = sessionmaker(bind=engine)
 session = Session()
 
-# se crean objetos de tipo Pesona
-
-# leer el archivo de datos
-
+# se descarga el json que contiene los datos de los paises
 archivo = request.get("https://pkgstore.datahub.io/core/country-codes/country-codes_json/data/616b1fb83cbfd4eb6d9e7d52924bb00a/country-codes_json.json")
+
+# se convierte desde json a una lista de diccionarios
 documentos = archivo.json()
 
+# se recorre cada diccionario con datos de un pais
 for d in documentos:
     print(d)
     print(len(d.keys()))
+
+    # se crea un objeto pais con esos datos
     p = Pais(
         nombre_pais=d['CLDR display name'],
         capital=d['Capital'],
@@ -36,8 +35,8 @@ for d in documentos:
         independencia=d['is_independent']
     )
 
+    # se agrega el objeto pais a la sesion para guardarlo en la base de datos
     session.add(p)
 
-# confirmar transacciones
-
+# se confirma la transaccion
 session.commit()
