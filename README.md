@@ -1,4 +1,6 @@
 # taller06
+Integrantes: Paola Vire Y Carlos Mejia
+
 
 ### Problemática
 
