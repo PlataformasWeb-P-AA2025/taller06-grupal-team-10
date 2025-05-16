@@ -25,5 +25,18 @@ class Pais(Base):
     lenguajes = Column(String)
     independencia = Column(String)
 
+
+    def __repr__(self):
+        return "Pais: nombre=%s capital=%s continente:%s dial:%s geoname:%s itu:%s lenguajes:%s independencia:%s \n " % (
+                          self.nombre_pais,
+                          self.capital,
+                          self.continente,
+                          self.dial,
+                          self.geoname_id,
+                          self.itu,
+                          self.lenguajes,
+                          self.independencia)
+    
+
 # crea las tablas en la base de datos si no existen
-Base.metadata.create_all(engine)
+Base.metadata.create_all(engine )

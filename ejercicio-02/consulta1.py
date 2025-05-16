@@ -1,0 +1,20 @@
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import and_, or_ # se importa el operador and
+
+# importa la clase Pais desde el archivo genera_base 
+from genera_base import Pais
+
+#trae la coneccion de la base de datos a traves de engine
+from ingresa_data import engine
+
+Session = sessionmaker(bind=engine)
+session = Session()
+
+
+
+print("Presentación de los países del continente Americano.")
+#el or nos permite buscar una coincidencia exacta o la otra opcion 
+paisesAmerica = session.query(Pais).filter(or_(Pais.continente=="SA", Pais.continente=="NA")).all()
+print(paisesAmerica)
+print("---------------------------------------")
